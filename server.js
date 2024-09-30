@@ -39,8 +39,9 @@ if (process.env.NODE_ENV !== 'production') {
        //? Your frontend URL in development  
     //   'http://localhost:5173'
 
-      //!Your frontend URL in production//
-    'https://workoutpal-backend-ukaw.onrender.com'
+      //!Your frontend URL in production. Should point to the deployment frontend URL//
+      
+    'https://workoutpal-frontend-axz7.onrender.com'
 
     }));
   }
