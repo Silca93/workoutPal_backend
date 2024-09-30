@@ -8,6 +8,10 @@ const workoutRoutes = require('./routes/workouts')
 
 const userRoutes = require("./routes/user")
 
+//express app
+const app = express()
+
+
 //!for deployment
 if (process.env.NODE_ENV === 'production') {
     const path = require('path');
@@ -19,8 +23,6 @@ if (process.env.NODE_ENV === 'production') {
   }
 //!
 
-//express app
-const app = express()
 
 // Use the CORS middleware
 app.use(cors());
