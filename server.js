@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const workoutRoutes = require('./routes/workouts')
 
-const userRoutes = require("./../backend/routes/user")
+const userRoutes = require("./routes/user")
 
 //!for deployment
 if (process.env.NODE_ENV === 'production') {
