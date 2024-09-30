@@ -35,7 +35,13 @@ app.use(cors());
 
 if (process.env.NODE_ENV !== 'production') {
     app.use(cors({
-      origin: 'http://localhost:5173' // Your frontend URL in development
+        origin: 
+       //? Your frontend URL in development  
+    //   'http://localhost:5173'
+
+      //!Your frontend URL in production//
+    'https://workoutpal-backend-ukaw.onrender.com'
+
     }));
   }
 
