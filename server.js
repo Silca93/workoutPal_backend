@@ -25,10 +25,10 @@ if (process.env.NODE_ENV !== 'production') {
     app.use(cors({
         origin: 
        //? Your frontend URL in development  
-        'http://localhost:5173'
+        // 'http://localhost:5173'
 
       //!Your frontend URL in production. Should point to the deployment frontend URL//
-    // 'https://workoutpal-frontend-axz7.onrender.com'
+    'https://workoutpal-frontend-axz7.onrender.com'
 
     }));
 }
