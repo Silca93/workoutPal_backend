@@ -1,61 +1,42 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
 const mongoose = require('mongoose');
+const workoutRoutes = require('./routes/workouts');
+const userRoutes = require("./routes/user");
 
-const workoutRoutes = require('./routes/workouts')
+const app = express();
 
-const userRoutes = require("./routes/user")
-
-//express app
-const app = express()
-
+// CORS configuration based on environment
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://workoutpal-frontend-axz7.onrender.com'  // Production frontend URL
+    : 'http://localhost:5173',                          // Development frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
 // Use the CORS middleware
-app.use(cors());
+app.use(cors(corsOptions));
 
-
-// app.use(cors({
-//   origin: 'http://localhost:5173'
-//    // Your frontend URL
-// }));
-
-if (process.env.NODE_ENV !== 'production') {
-    app.use(cors({
-        origin: 
-       //? Your frontend URL in development  
-        // 'http://localhost:5173'
-
-      //!Your frontend URL in production. Should point to the deployment frontend URL//
-    'https://workoutpal-frontend-axz7.onrender.com'
-
-    }));
-}
-
-
-//middleware
+// Middleware to parse JSON and log request details
 app.use(express.json());
-app.use((req,res,next) => {
+app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
-    
-})
+});
 
-//routes
+// Routes
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/user', userRoutes);
 
-//connect db
+// Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGO_URI)
-.then(()=> {
-
-//listening
-app.listen(process.env.PORT, () => {
-    console.log('connected to DB & listening on port ' + process.env.PORT);
-        
-    })
-})
-.catch((error) => {
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(`Connected to DB & listening on port ${process.env.PORT}`);
+    });
+  })
+  .catch((error) => {
     console.log(error);
-})
+  });
